@@ -1,0 +1,26 @@
+{
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs18",
+    "deployment": {
+      "platform": "gcfv2",
+      "region": "us-central1",
+      "memory": "256MiB",
+      "timeoutSeconds": 60
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
