@@ -29,18 +29,34 @@ Future<bool> isTokenValid() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  final prefs = await SharedPreferences.getInstance();
+  final isLoggedIn = prefs.getBool('isLoggedIn');
 
-  final isValid = await isTokenValid();
-
-  runApp(MaterialApp(
-    title: 'Flutter Chat',
-    theme: ThemeData(primarySwatch: Colors.blue),
-    home: isValid ? MainNavigator() : LoginScreen(),
-  ));
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
+
+class MyApp extends StatelessWidget {
+  final bool? isLoggedIn;
+
+  const MyApp({super.key, required this.isLoggedIn});
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoggedIn == null) {
+      // まだ読み込み中
+      return const MaterialApp(
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
+      );
+    }
+
+    return MaterialApp(
+      title: 'Flutter Chat',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: isLoggedIn! ? MainNavigator() : LoginScreen(),
+    );
+  }
+}
+
 
 
 
