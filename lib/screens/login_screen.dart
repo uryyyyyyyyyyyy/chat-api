@@ -36,6 +36,7 @@ class LoginScreen extends StatelessWidget {
 
       // ✅ ログイン情報を保存
       final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('token', result['token']);   //トークン保存
       await prefs.setBool('isLoggedIn', true);
       await prefs.setString('username', result['username']);
 
@@ -57,6 +58,8 @@ class LoginScreen extends StatelessWidget {
       );
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {

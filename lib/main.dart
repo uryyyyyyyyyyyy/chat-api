@@ -1,40 +1,87 @@
-import 'dart:math';
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:akebi2/firebase_options.dart';
-import 'screens/login_screen.dart';//ログイン画面
-import 'screens/RegisterScreen.dart';//新規登録画面
-import 'package:shared_preferences/shared_preferences.dart';//ログイン保持
 import 'navigator.dart';
+import 'screens/login_screen.dart';
 
+// 🔑 トークンの有効性チェック
+Future<bool> isTokenValid() async {
+  final prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString('token');
 
+  if (token == null) return false;
+
+  final response = await http.get(
+    Uri.parse('http://10.0.2.2:3000/protected'), // 🌐 APIのトークン検証エンドポイント
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    },
+  );
+
+  return response.statusCode == 200;
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final prefs = await SharedPreferences.getInstance();
-  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-  print('Firebase initializeApp 呼び出し前');
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+  final isValid = await isTokenValid();
 
-    print('runApp呼び出し前');
-    runApp(MaterialApp(
-      title: 'Flutter Chat',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: isLoggedIn ? MainNavigator() : LoginScreen(),
-    ));
-  } catch (e, st) {
-    print('Firebase初期化エラー: $e');
-    print('StackTrace: $st');
-  }
+  runApp(MaterialApp(
+    title: 'Flutter Chat',
+    theme: ThemeData(primarySwatch: Colors.blue),
+    home: isValid ? MainNavigator() : LoginScreen(),
+  ));
 }
+
+
+
+
+// import 'dart:math';
+// import 'dart:async';
+// import 'package:flutter/material.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:cloud_functions/cloud_functions.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:akebi2/firebase_options.dart';
+// import 'screens/login_screen.dart';//ログイン画面
+// import 'screens/RegisterScreen.dart';//新規登録画面
+// import 'package:shared_preferences/shared_preferences.dart';//ログイン保持
+// import 'navigator.dart';
+//
+//
+//
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//
+//   final prefs = await SharedPreferences.getInstance();
+//   final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+//
+//   print('Firebase initializeApp 呼び出し前');
+//   try {
+//     await Firebase.initializeApp(
+//       options: DefaultFirebaseOptions.currentPlatform,
+//     );
+//
+//     print('runApp呼び出し前');
+//     runApp(MaterialApp(
+//       title: 'Flutter Chat',
+//       theme: ThemeData(primarySwatch: Colors.blue),
+//       home: isLoggedIn ? MainNavigator() : LoginScreen(),
+//     ));
+//   } catch (e, st) {
+//     print('Firebase初期化エラー: $e');
+//     print('StackTrace: $st');
+//   }
+// }
 
 
 // class ChatScreen extends StatefulWidget {
