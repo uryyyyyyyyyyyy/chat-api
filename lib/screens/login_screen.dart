@@ -16,10 +16,10 @@ class LoginScreen extends StatelessWidget {
   Future<void> login(BuildContext context) async {
     final url = Uri.parse(
       kIsWeb
-          ? 'http://localhost:3000/login'
+          ? 'https://chat-api-cf76.onrender.com/login'
           : Platform.isAndroid
-          ? 'http://10.0.2.2:3000/login'
-          : 'http://localhost:3000/login',
+          ? 'https://chat-api-cf76.onrender.com/login'
+          : 'https://chat-api-cf76.onrender.com/login',
     );
 
     final response = await http.post(

@@ -4,7 +4,9 @@ const app = express();
 const { router: authRoutes, verifyToken } = require('./routes/auth');
 
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://imaginative-nasturtium-4f85bc.netlify.app'
+}));
 app.use(express.json());
 app.use(authRoutes);
 

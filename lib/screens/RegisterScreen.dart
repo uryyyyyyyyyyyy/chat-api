@@ -15,10 +15,10 @@ class RegisterScreen extends StatelessWidget {
   Future<void> register(BuildContext context) async {
     final url = Uri.parse(
       kIsWeb
-          ? 'http://localhost:3000/register'
+          ? 'https://chat-api-cf76.onrender.com/register'
           : Platform.isAndroid
-          ? 'http://10.0.2.2:3000/register'
-          : 'http://localhost:3000/register',
+          ? 'https://chat-api-cf76.onrender.com/register'
+          : 'https://chat-api-cf76.onrender.com/register',
     );
 
 
