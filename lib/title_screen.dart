@@ -1,16 +1,29 @@
-import 'package:akebi2/navigator.dart';
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart'; // ← 次の画面に応じて変更してね
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:akebi2/navigator.dart';
+import 'tyu-toriaru.dart'; // チュートリアル画面
+import 'globalhome.dart';
 
 class TitleScreen extends StatelessWidget {
+  Future<void> _handleTap(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final hasDoneTutorial = prefs.getBool('tutorial_completed') ?? false;
+
+    if (hasDoneTutorial) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => GlobalHomeScreen()),
+      );
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => TutorialScreen()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => MainNavigator()),
-        );
-      },
+      onTap: () => _handleTap(context),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Center(
