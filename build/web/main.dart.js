@@ -38818,7 +38818,7 @@ $1(a){return A.apO()},
 $S:79}
 A.tG.prototype={
 O(a){var s=null
-return A.nY(s,A.t0(s,B.k,A.l9(A.iy(A.b([new A.xt(A.aGG(s,s,new A.l4("assets/logo.png",s,s)),150,s),A.eO(s,20,s),A.cc("\u3042\u3051\u3073\u30c1\u30e3\u30c3\u30c8",s,s,s,A.eT(s,s,s,s,s,s,s,s,s,s,s,28,s,s,B.d3,s,s,!0,s,s,s,s,s,s,s,s),s,s),A.eO(s,10,s),A.cc("\u30bf\u30c3\u30d7\u3057\u3066\u306f\u3058\u3081\u308b",s,s,s,A.eT(s,s,B.ek,s,s,s,s,s,s,s,s,16,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],t.D),B.ao,B.rU,B.aX),s,s),s),B.ap,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,new A.adk(a),s,s,s,s,s,s)}}
+return A.nY(s,A.t0(s,B.k,A.l9(A.iy(A.b([new A.xt(A.aGG(s,s,new A.l4("assets/logo.png",s,s)),150,s),A.eO(s,20,s),A.cc("\u660e\u65e5\u3061\u3083\u3093\u306e\u30bb\u30fc\u30e9\u30fc\u670d",s,s,s,A.eT(s,s,s,s,s,s,s,s,s,s,s,28,s,s,B.d3,s,s,!0,s,s,s,s,s,s,s,s),s,s),A.eO(s,10,s),A.cc("\u30bf\u30c3\u30d7\u3057\u3066\u306f\u3058\u3081\u308b",s,s,s,A.eT(s,s,B.ek,s,s,s,s,s,s,s,s,16,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],t.D),B.ao,B.rU,B.aX),s,s),s),B.ap,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,new A.adk(a),s,s,s,s,s,s)}}
 A.adk.prototype={
 $0(){A.lV(this.a).akK(A.lR(new A.adj(),null,t.z))},
 $S:0}
