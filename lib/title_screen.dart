@@ -20,7 +20,7 @@ class TitleScreen extends StatelessWidget {
               Image.asset('assets/logo.png', width: 150),
               SizedBox(height: 20),
               Text(
-                'あけびチャット',
+                '明日ちゃんのセーラー服',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
