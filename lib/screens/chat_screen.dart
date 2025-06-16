@@ -56,16 +56,47 @@ class _ChatScreenState extends State<ChatScreen> {
       }
     }
 
-    setState(() {
-      sceneData = data;
-      _messages.add({
-        'text': replyText,
-        'sender': 'ai',
-        'timestamp': now,
-        'read': true,
+    //メッセージを配列へ
+    List<String> aiReplies = [];
+
+    if (replies.any((r) => r['condition']['sent_time'] == sentTimeLabel && r['condition']['read_time'] == readTimeLabel)) {
+      final match = replies.firstWhere(
+            (r) => r['condition']['sent_time'] == sentTimeLabel && r['condition']['read_time'] == readTimeLabel,
+      );
+      aiReplies = List<String>.from(match['text']);
+    } else {
+      aiReplies = List<String>.from(data['default_reply'] ?? ['...']);
+    }
+
+    sceneData = data;
+    _options = List<String>.from((data['options'] ?? []).map((e) => e['text']));
+
+// 最初の1文を即送信
+    if (aiReplies.isNotEmpty) {
+      setState(() {
+        _messages.add({
+          'text': aiReplies[0],
+          'sender': 'ai',
+          'timestamp': DateTime.now(),
+          'read': true,
+        });
       });
-      _options = List<String>.from((data['options'] ?? []).map((e) => e['text']));  //選択肢をセット
-    });
+    }
+
+// 2文目以降を15秒間隔で順に送信
+    for (int i = 1; i < aiReplies.length; i++) {
+      Future.delayed(Duration(seconds: 15 * i), () {
+        setState(() {
+          _messages.add({
+            'text': aiReplies[i],
+            'sender': 'ai',
+            'timestamp': DateTime.now(),
+            'read': true,
+          });
+        });
+      });
+    }
+
 
 
     // --- 無反応時リアクション処理 ---

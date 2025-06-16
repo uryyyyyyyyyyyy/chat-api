@@ -6,6 +6,7 @@ import 'screens/login_screen.dart';
 import '../navigator.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
+import 'title_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -33,14 +34,18 @@ class _SplashScreenState extends State<SplashScreen> {
         return;
       }
 
+      String apiUrl;
+
+      if (kIsWeb) {
+        apiUrl = 'https://chat-api-cf76.onrender.com/protected';
+      } else if (Platform.isAndroid) {
+        apiUrl = 'http://10.0.2.2:3000/protected';
+      } else {
+        apiUrl = 'http://localhost:3000/protected';
+      }
+
       final response = await http.get(
-        Uri.parse(
-          kIsWeb
-            ? 'https://chat-api-cf76.onrender.com/protected'
-            : Platform.isAndroid
-            ? 'http://10.0.2.2:3000/protected'
-            : 'http://localhost:3000/protected',
-        ),
+        Uri.parse(apiUrl),
         headers: {'Authorization': 'Bearer $token'},
       );
 
@@ -51,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
         print('✅ 認証成功。メイン画面へ遷移します。');
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => MainNavigator()),
+          MaterialPageRoute(builder: (_) => TitleScreen()),
         );
       } else {
         print('❌ トークンが無効。ログイン画面へ戻ります。');
