@@ -5,8 +5,9 @@
 *.swp
 .DS_Store
 .atom/
-.build/
+.build/**
 !build/web/
+!build/web/**
 .buildlog/
 .history
 .svn/
@@ -49,3 +50,11 @@ google-cloud-sdk/
 google-cloud-sdk/
 google-cloud-sdk/
 google-cloud-sdk-456.0.0-darwin-arm.tar.gz
+
+# Flutterビルドの無視設定
+/build/**
+
+# ただし Netlify用に webビルドは含める
+!build/web/
+!build/web/**
+
