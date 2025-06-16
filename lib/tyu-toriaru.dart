@@ -49,6 +49,13 @@ class _TutorialScreenState extends State<TutorialScreen> {
 
   void _completeTutorial() async {
     if (_formKey.currentState!.validate()) {
+      if (_birthday == null || _birthday!.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('誕生日を選択してください')),
+        );
+        return;
+      }
+
       _formKey.currentState!.save();
 
       final prefs = await SharedPreferences.getInstance();
@@ -58,7 +65,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
       await prefs.setString('user_height', _height);
       await prefs.setString('user_blood', _bloodType);
       await prefs.setString('user_life', _life);
-      await prefs.setString('user_birthday', _birthday ?? ''); // ← 保存
+      await prefs.setString('user_birthday', _birthday!);
 
       Navigator.pushReplacement(
         context,
@@ -85,7 +92,8 @@ class _TutorialScreenState extends State<TutorialScreen> {
               TextFormField(
                 decoration: InputDecoration(labelText: '姓'),
                 onSaved: (value) => _sei = value ?? '',
-                validator: (value) => value == null || value.isEmpty ? '姓を入力してください' : null,
+                validator: (value) =>
+                value == null || value.isEmpty ? '姓を入力してください' : null,
               ),
 
               TextFormField(
@@ -97,7 +105,8 @@ class _TutorialScreenState extends State<TutorialScreen> {
                   });
                 },
                 onSaved: (value) => _mei = value ?? '',
-                validator: (value) => value == null || value.isEmpty ? '名を入力してください' : null,
+                validator: (value) =>
+                value == null || value.isEmpty ? '名を入力してください' : null,
               ),
 
               if (_characterReaction != null)
@@ -109,7 +118,6 @@ class _TutorialScreenState extends State<TutorialScreen> {
                   ),
                 ),
 
-              // 🔽 誕生日（DatePicker）
               ListTile(
                 title: Text('誕生日'),
                 subtitle: Text(_birthday ?? '未選択'),
@@ -134,6 +142,15 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 decoration: InputDecoration(labelText: '身長（cm）'),
                 keyboardType: TextInputType.number,
                 onSaved: (value) => _height = value ?? '',
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return '身長を入力してください';
+                  }
+                  if (!RegExp(r'^\d+$').hasMatch(value.trim())) {
+                    return '半角数字のみで入力してください';
+                  }
+                  return null;
+                },
               ),
 
               DropdownButtonFormField<String>(
