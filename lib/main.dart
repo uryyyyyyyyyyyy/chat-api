@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:akebi2/firebase_options.dart';
 import 'navigator.dart';
 import 'screens/login_screen.dart';
+import 'splash_screen.dart';
 
 // 🔑 トークンの有効性チェック
 Future<bool> isTokenValid() async {
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Chat',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: isLoggedIn! ? MainNavigator() : LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }

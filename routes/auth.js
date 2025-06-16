@@ -91,5 +91,14 @@ function verifyToken(req, res, next) {
   }
 }
 
+router.get('/protected', verifyToken, (req, res) => {
+  // verifyToken ミドルウェアでトークンが有効か確認済み
+  res.status(200).json({ message: '認証済みユーザー', user: req.user });
+})
+
+router.get('/test', (req, res) => {
+  res.send('✅ Server is working');
+});
+
 
 module.exports = { router, verifyToken };

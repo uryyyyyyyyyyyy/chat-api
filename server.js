@@ -5,12 +5,15 @@ const { router: authRoutes, verifyToken } = require('./routes/auth');
 
 
 app.use(cors({
-  origin: 'https://imaginative-nasturtium-4f85bc.netlify.app'
+  origin: 'https://imaginative-nasturtium-4f85bc.netlify.app',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 app.use(authRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT,'0.0.0.0', () => {
   console.log(`✅ サーバー起動中 http://localhost:${PORT}`);
 });
