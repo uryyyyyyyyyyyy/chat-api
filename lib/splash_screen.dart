@@ -25,7 +25,10 @@ class _SplashScreenState extends State<SplashScreen> {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('token');
 
+      print('📦 保存されたトークン: $token');
+
       if (token == null) {
+        print('🚫 トークンが存在しません。ログインへ遷移します。');
         _goToLogin();
         return;
       }
@@ -41,12 +44,17 @@ class _SplashScreenState extends State<SplashScreen> {
         headers: {'Authorization': 'Bearer $token'},
       );
 
+      print('🌐 ステータスコード: ${response.statusCode}');
+      print('📡 レスポンスボディ: ${response.body}');
+
       if (response.statusCode == 200) {
+        print('✅ 認証成功。メイン画面へ遷移します。');
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => MainNavigator()),
         );
       } else {
+        print('❌ トークンが無効。ログイン画面へ戻ります。');
         prefs.remove('token');
         _goToLogin();
       }
