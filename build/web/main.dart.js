@@ -38360,7 +38360,7 @@ am(){return new A.Sq()}}
 A.Sq.prototype={
 aw(){this.aQ()
 this.qk()},
-qk(){var s=0,r=A.N(t.H),q,p=2,o=[],n=this,m,l,k,j,i,h,g
+qk(){var s=0,r=A.N(t.H),q,p=2,o=[],n=this,m,l,k,j,i,h,g,f
 var $async$qk=A.J(function(a,b){if(a===1){o.push(b)
 s=p}while(true)switch(s){case 0:p=4
 s=7
@@ -38371,26 +38371,28 @@ A.il("\ud83d\udce6 \u4fdd\u5b58\u3055\u308c\u305f\u30c8\u30fc\u30af\u30f3: "+A.j
 if(l==null){A.il("\ud83d\udeab \u30c8\u30fc\u30af\u30f3\u304c\u5b58\u5728\u3057\u307e\u305b\u3093\u3002\u30ed\u30b0\u30a4\u30f3\u3078\u9077\u79fb\u3057\u307e\u3059\u3002")
 n.BA()
 s=1
-break}i=t.N
+break}k=null
+k="https://chat-api-cf76.onrender.com/protected"
+h=t.N
 s=8
-return A.Q(A.aM5(A.fb("https://chat-api-cf76.onrender.com/protected"),A.a4(["Authorization","Bearer "+l],i,i)),$async$qk)
-case 8:k=b
-A.il("\ud83c\udf10 \u30b9\u30c6\u30fc\u30bf\u30b9\u30b3\u30fc\u30c9: "+k.b)
-i=k
-A.il("\ud83d\udce1 \u30ec\u30b9\u30dd\u30f3\u30b9\u30dc\u30c7\u30a3: "+A.axO(A.awR(i.e)).ev(i.w))
-if(k.b===200){A.il("\u2705 \u8a8d\u8a3c\u6210\u529f\u3002\u30e1\u30a4\u30f3\u753b\u9762\u3078\u9077\u79fb\u3057\u307e\u3059\u3002")
-i=n.c
-i.toString
-A.apn(i,A.of(new A.akJ(),null,t.z))}else{A.il("\u274c \u30c8\u30fc\u30af\u30f3\u304c\u7121\u52b9\u3002\u30ed\u30b0\u30a4\u30f3\u753b\u9762\u3078\u623b\u308a\u307e\u3059\u3002")
+return A.Q(A.aM5(A.fb(k),A.a4(["Authorization","Bearer "+l],h,h)),$async$qk)
+case 8:j=b
+A.il("\ud83c\udf10 \u30b9\u30c6\u30fc\u30bf\u30b9\u30b3\u30fc\u30c9: "+j.b)
+h=j
+A.il("\ud83d\udce1 \u30ec\u30b9\u30dd\u30f3\u30b9\u30dc\u30c7\u30a3: "+A.axO(A.awR(h.e)).ev(h.w))
+if(j.b===200){A.il("\u2705 \u8a8d\u8a3c\u6210\u529f\u3002\u30e1\u30a4\u30f3\u753b\u9762\u3078\u9077\u79fb\u3057\u307e\u3059\u3002")
+h=n.c
+h.toString
+A.apn(h,A.of(new A.akJ(),null,t.z))}else{A.il("\u274c \u30c8\u30fc\u30af\u30f3\u304c\u7121\u52b9\u3002\u30ed\u30b0\u30a4\u30f3\u753b\u9762\u3078\u623b\u308a\u307e\u3059\u3002")
 m.a.C(0,"token")
 $.ao_().C(0,"flutter.token")
 n.BA()}p=2
 s=6
 break
 case 4:p=3
-g=o.pop()
-j=A.ac(g)
-A.il("\ud83d\udd25 \u30a8\u30e9\u30fc\u767a\u751f: "+A.j(j))
+f=o.pop()
+i=A.ac(f)
+A.il("\ud83d\udd25 \u30a8\u30e9\u30fc\u767a\u751f: "+A.j(i))
 n.BA()
 s=6
 break
